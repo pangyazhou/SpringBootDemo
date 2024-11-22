@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+# 物联网告警数据库配置
+spring:
+  datasource:
+    druid:
+      initial-size: 1
+      min-idle: 1
+      max-active: 1
+      max-wait: 5000
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: true
+      test-on-return: true
+      time-between-eviction-runs-millis: 10000
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/demo?socketTimeout=3000
+    username: root
+    password: 123456
+
+
+# mybatis-plus 配置
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
