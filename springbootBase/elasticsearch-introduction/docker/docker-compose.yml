@@ -1,0 +1,22 @@
+version: "3"
+services:
+  elastic:
+    container_name: elasticsearch
+    image: elasticsearch:7.14.0
+    environment:
+      - discovery.type=single-node
+    volumes:
+      - D:\home\es\data:/usr/share/elasticsearch/data
+      - D:\home\es\config:/usr/share/elasticsearch/config
+      - D:\home\es\plugins:/usr/share/elasticsearch/plugins
+      - D:\home\es\logs:/usr/share/elasticsearch/logs
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      default:
+
+networks:
+  default:
+    external: true
+    name: elastic
