@@ -14,7 +14,7 @@ services:
       - 9200:9200
       - 9300:9300
     networks:
-      default:
+      elastic:
 
   kibana:
     container_name: kibana
@@ -24,9 +24,8 @@ services:
     ports:
       - 5601:5601
     networks:
-      default:
+      elastic:
 
 networks:
-  default:
-    external: true
-    name: elastic
+  elastic:
+    driver: bridge
