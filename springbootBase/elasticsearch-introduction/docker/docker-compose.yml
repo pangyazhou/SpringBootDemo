@@ -16,6 +16,16 @@ services:
     networks:
       default:
 
+  kibana:
+    container_name: kibana
+    image: bitnami/kibana:7.14.0
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - 5601:5601
+    networks:
+      default:
+
 networks:
   default:
     external: true
