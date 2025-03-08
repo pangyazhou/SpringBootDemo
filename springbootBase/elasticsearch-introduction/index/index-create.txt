@@ -1,0 +1,226 @@
+PUT /fault_instance_index
+{
+    "settings": {
+        "analysis": {
+            "analyzer": {
+                "my_analyzer": {
+                    "tokenizer": "ik_max_word",
+                    "filter": "py"
+                }
+            },
+            "filter": {
+                "py": {
+                    "type": "pinyin",
+                    "keep_full_pinyin": false,
+                    "keep_joined_full_pinyin": true,
+                    "keep_original": true,
+                    "limit_first_letter_length": 16,
+                    "remove_duplicated_term": true,
+                    "none_chinese_pinyin_tokenize": false
+                }
+            }
+        }
+    },
+    "mappings": {
+        "properties": {
+            "id": {
+                "type": "long"
+            },
+            "fillId": {
+                "type": "long"
+            },
+            "bomId": {
+                "type": "long"
+            },
+            "faultLocation": {
+                "type": "text"
+            },
+            "faultType": {
+                "type": "text"
+            },
+            "faultLevel": {
+                "type": "text"
+            },
+            "taskType": {
+                "type": "text"
+            },
+            "taskCode": {
+                "type": "text"
+            },
+            "mainMachineWorkCode": {
+                "type": "text"
+            },
+            "productName": {
+                "type": "text"
+            },
+            "modelCode": {
+                "type": "text"
+            },
+            "partCode": {
+                "type": "text"
+            },
+            "batchCode": {
+                "type": "text"
+            },
+            "outsourceCompany": {
+                "type": "text"
+            },
+            "custom": {
+                "type": "text"
+            },
+            "major": {
+                "type": "text"
+            },
+            "planeManufactureCode": {
+                "type": "text"
+            },
+            "planeType": {
+                "type": "text"
+            },
+            "systemCode": {
+                "type": "text"
+            },
+            "flyHourTotal": {
+                "type": "integer"
+            },
+            "workHourTotal": {
+                "type": "integer"
+            },
+            "takeOffAndLandTotal": {
+                "type": "integer"
+            },
+            "calendarYear": {
+                "type": "integer"
+            },
+            "life": {
+                "type": "integer"
+            },
+            "repairInterval": {
+                "type": "integer"
+            },
+            "mainMachineRepairType": {
+                "type": "text"
+            },
+            "componentRepairType": {
+                "type": "text"
+            },
+            "faultModel": {
+                "type": "text"
+            },
+            "faultJudgmentMethod": {
+                "type": "text"
+            },
+            "faultDiscoveryProcess": {
+                "type": "text"
+            },
+            "faultHappenTime": {
+                "type": "date",
+                "format": "yyyy-MM-dd HH:mm:ss"
+            },
+            "faultDate": {
+                "type": "date",
+                "format": "yyyy-MM-dd HH:mm:ss"
+            },
+            "faultHandleDept": {
+                "type": "text"
+            },
+            "faultHandleGroup": {
+                "type": "text"
+            },
+            "faultHandleUser": {
+                "type": "text"
+            },
+            "planExcludeDate": {
+                "type": "date",
+                "format": "yyyy-MM-dd HH:mm:ss"
+            },
+            "faultExcludeDate": {
+                "type": "date",
+                "format": "yyyy-MM-dd HH:mm:ss"
+            },
+            "faultReason": {
+                "type": "text"
+            },
+            "faultExcludeWay": {
+                "type": "text"
+            },
+            "productOrComponentEffect": {
+                "type": "text"
+            },
+            "systemEffect": {
+                "type": "text"
+            },
+            "faultPhenomenonDescription": {
+                "type": "text",
+                "analyzer": "my_analyzer",
+                "search_analyzer": "ik_smart"
+            },
+            "faultPhenomenonDescriptionVector": {
+                "type": "dense_vector",
+                "dims": 512
+            },
+            "faultReasonAnalyze": {
+                "type": "text",
+                "analyzer": "my_analyzer",
+                "search_analyzer": "ik_smart"
+            },
+            "faultReasonAnalyzeVector": {
+                "type": "dense_vector",
+                "dims": 512
+            },
+            "faultRepairContent": {
+                "type": "text",
+                "analyzer": "my_analyzer",
+                "search_analyzer": "ik_smart"
+            },
+            "faultRepairContentVector": {
+                "type": "dense_vector",
+                "dims": 512
+            },
+            "faultImproveStep": {
+                "type": "text"
+            },
+            "faultNature": {
+                "type": "text"
+            },
+            "faultResponsibilityDept": {
+                "type": "text"
+            },
+            "faultResponsibilityGroup": {
+                "type": "text"
+            },
+            "faultResponsibilityUser": {
+                "type": "text"
+            },
+            "problemZeroed": {
+                "type": "text"
+            },
+            "qualityAssessment": {
+                "type": "text"
+            },
+            "parentFaultCode": {
+                "type": "text"
+            },
+            "inputSource": {
+                "type": "text"
+            },
+            "fileUrl": {
+                "type": "text"
+            },
+            "createTime": {
+                "type": "date",
+                "format": "yyyy-MM-dd HH:mm:ss"
+            },
+            "updateTime": {
+                "type": "date",
+                "format": "yyyy-MM-dd HH:mm:ss"
+            },
+            "creator": {
+                "type": "text"
+            },
+            "updater": {
+                "type": "text"
+            }
+        }
+    }
+}

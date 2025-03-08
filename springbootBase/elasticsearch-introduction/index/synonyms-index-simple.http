@@ -1,0 +1,46 @@
+### 同义词索引
+
+
+### 删除索引
+DELETE {{host}}/synonyms-index
+
+### 创建索引
+PUT {{host}}/synonyms-index
+Content-Type: application/json
+
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "synonyms_analyzer": {
+          "tokenizer": "ik_smart",
+          "filter": [
+            "doc_synonym"
+          ]
+        }
+      },
+      "filter": {
+        "doc_synonym": {
+          "type": "synonym",
+          "synonyms": ["苹果,iphone,ipad", "理想,理想汽车", "漂亮,美丽"]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "name": {
+        "type": "text",
+        "analyzer": "synonyms_analyzer"
+      }
+    }
+  }
+}
+
+### 添加文档
+POST {{host}}/synonyms-index/_doc
+Content-Type: application/json
+
+{
+  "name": "苹果手机"
+}
