@@ -1,0 +1,17 @@
+### 文本向量化
+POST http://192.168.1.247:9983/v1/embeddings
+Content-Type: application/json
+
+{
+  "model": "bge-small-zh-v1.5",
+  "input": "汽车电路",
+  "encoding_format": "float"
+}
+> {%
+    const total = 100;
+    for (let i = 0; i < total; i++) {
+        client.test("Request #" + (i + 1), function() {});
+        client.assert(response.status === 200);
+        client.log("Request #" + (i + 1) + ": " + response.status)
+    }
+%}

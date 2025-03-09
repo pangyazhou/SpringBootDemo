@@ -1,0 +1,149 @@
+### ES搜索功能测试
+### 搜索全部
+POST {{host}}/{{index}}/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+### 分页搜索
+POST {{host}}/{{index}}/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "match_all": {}
+  },
+  "from": 0,
+  "size": 1
+}
+
+### 排序
+POST {{host}}/{{index}}/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "match_all": {}
+  },
+  "sort": [
+    {
+      "_id": "desc"
+    }
+  ]
+}
+
+### 搜索指定字段
+POST {{host}}/{{index}}/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "match_all": {}
+  },
+  "_source": [
+      "remark",
+      "description"
+    ]
+}
+
+### 脚本字段
+POST {{host}}/{{index}}/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "match_all": {}
+  },
+  "script_fields": {
+    "remark_new": {
+      "script": {
+        "lang": "painless",
+        "source": "doc['remark'].value"
+      }
+    }
+  }
+}
+
+### 全文匹配 or
+POST {{host}}/{{index}}/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "match": {
+      "remark": "园林景观"
+    }
+  }
+}
+
+### 全文匹配 and
+POST {{host}}/{{index}}/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "match": {
+      "remark": {
+        "query": "国外毕业证",
+        "operator": "and"
+      }
+    }
+  }
+}
+
+### 分词顺序匹配
+POST {{host}}/{{index}}/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "match_phrase": {
+      "remark": {
+        "query": "毕业证"
+      }
+    }
+  }
+}
+
+### 不作分词查询
+POST {{host}}/{{index}}/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "term": {
+      "remark": "景观设计"
+    }
+  }
+}
+
+### 传入多个单词查询 term 之间默认关系为 OR
+POST {{host}}/{{index}}/_search
+Content-Type: application/json
+
+{
+  "explain": true,
+  "query": {
+    "terms": {
+      "remark": ["景观设计", "绿色建筑"]
+    }
+  }
+}
+
+### 传入多个单词查询 term 之间关系为 AND
+POST {{host}}/{{index}}/_search
+Content-Type: application/json
+
+{
+  "explain": true,
+  "query": {
+    "query_string": {
+      "default_field": "remark",
+      "query": "景观设计 AND 绿色建筑"
+    }
+  }
+}

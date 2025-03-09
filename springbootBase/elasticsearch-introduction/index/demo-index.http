@@ -1,10 +1,10 @@
 
 ### 删除索引
-DELETE {{host}}/demo-index
+DELETE {{host}}/{{index}}
 
 
 ### 创建索引
-PUT {{host}}/demo-index
+PUT {{host}}/{{index}}
 Content-Type: application/json
 
 {
@@ -13,20 +13,25 @@ Content-Type: application/json
       "analyzer": {
         "custom_analyzer": {
           "tokenizer": "ik_max_word",
-          "filter": "custom_pinyin"
+          "filter": ["custom_pinyin"]
         }
       },
       "filter": {
          "custom_pinyin": {
            "type": "pinyin",
            "keep_original": true,
-           "keep_full_pinyin": true,
+           "keep_full_pinyin": false,
            "keep_joined_full_pinyin": true,
            "keep_first_letter": false,
            "lowercase": true,
            "limit_first_letter_length": 16,
-           "remove_duplicated_term": true
-         }
+           "remove_duplicated_term": true,
+           "keep_none_chinese": false
+         },
+        "pinyin_length_filter": {
+          "type": "length",
+          "min": 2
+        }
       }
     }
   },
@@ -58,14 +63,16 @@ Content-Type: application/json
       "analyzer": "custom_analyzer"
     },
     "description": {
-      "type": "text"
+      "type": "text",
+      "analyzer": "custom_analyzer",
+      "search_analyzer": "ik_smart"
     }
   }
   }
 }
 
 ### 添加文档
-POST {{host}}/demo-index/_doc
+POST {{host}}/{{index}}/_doc
 Content-Type: application/json
 
 {
@@ -73,7 +80,7 @@ Content-Type: application/json
   "description": "汽车在过减速带时悬挂发出巨大的撞击声。"
 }
 ### 添加文档
-POST {{host}}/demo-index/_doc
+POST {{host}}/{{index}}/_doc
 Content-Type: application/json
 
 {
@@ -81,7 +88,7 @@ Content-Type: application/json
   "description": "轮胎出现鼓包，且有漏气现象。"
 }
 ### 添加文档
-POST {{host}}/demo-index/_doc
+POST {{host}}/{{index}}/_doc
 Content-Type: application/json
 
 {
@@ -89,7 +96,7 @@ Content-Type: application/json
   "description": "安全气囊指示灯常亮。"
 }
 ### 添加文档
-POST {{host}}/demo-index/_doc
+POST {{host}}/{{index}}/_doc
 Content-Type: application/json
 
 {
@@ -97,7 +104,7 @@ Content-Type: application/json
   "description": "变速箱换挡时有明显的冲击感。"
 }
 ### 添加文档
-POST {{host}}/demo-index/_doc
+POST {{host}}/{{index}}/_doc
 Content-Type: application/json
 
 {
@@ -105,7 +112,7 @@ Content-Type: application/json
   "description": "燃油表显示不准确，油箱实际油量与显示不符。"
 }
 ### 添加文档
-POST {{host}}/demo-index/_doc
+POST {{host}}/{{index}}/_doc
 Content-Type: application/json
 
 {
@@ -113,7 +120,7 @@ Content-Type: application/json
   "description": "发动机冷却液频繁泄漏。"
 }
 ### 添加文档
-POST {{host}}/demo-index/_doc
+POST {{host}}/{{index}}/_doc
 Content-Type: application/json
 
 {
@@ -121,7 +128,7 @@ Content-Type: application/json
   "description": "刹车踏板行程变长，刹车效果减弱。"
 }
 ### 添加文档
-POST {{host}}/demo-index/_doc
+POST {{host}}/{{index}}/_doc
 Content-Type: application/json
 
 {
