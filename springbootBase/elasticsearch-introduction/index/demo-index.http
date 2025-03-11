@@ -67,4 +67,4 @@ Content-Type: application/json
 POST http://localhost:9200/_bulk
 Content-Type: application/json
 
-< ./es_test.json
+< ./target.json

@@ -1,0 +1,101 @@
+### ES索引配置修改
+
+### 修改setting
+PUT {{host}}/{{index_bak}}
+Content-Type: application/json
+
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "custom_analyzer": {
+          "tokenizer": "ik_max_word",
+          "filter": "custom_pinyin"
+        },
+        "ik_smart_pinyin": {
+          "type": "custom",
+          "tokenizer": "ik_smart",
+          "filter": [
+            "custom_pinyin"
+          ]
+        }
+      },
+      "filter": {
+        "custom_pinyin": {
+          "type": "pinyin",
+          "keep_original": true,
+          "keep_full_pinyin": false,
+          "keep_joined_full_pinyin": true,
+          "keep_first_letter": false,
+          "lowercase": true,
+          "limit_first_letter_length": 16,
+          "remove_duplicated_term": true
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "ids": {
+        "type": "long"
+      },
+      "age": {
+        "type": "integer"
+      },
+      "sex": {
+        "type": "byte"
+      },
+      "grade": {
+        "type": "short"
+      },
+      "salary": {
+        "type": "float"
+      },
+      "location": {
+        "type": "double"
+      },
+      "name": {
+        "type": "keyword"
+      },
+      "remark": {
+        "type": "text",
+        "analyzer": "custom_analyzer"
+      },
+      "description": {
+        "type": "text",
+        "analyzer": "ik_smart_pinyin"
+      }
+    }
+  }
+}
+
+### 数据迁移
+POST {{host}}/_reindex
+Content-Type: application/json
+
+{
+  "source": {
+    "index": "{{index}}"
+  },
+  "dest": {
+    "index": "{{index_bak}}"
+  }
+}
+
+### 删除旧索引
+DELETE {{host}}/{{index}}
+
+### 改名
+POST {{host}}/_aliases
+Content-Type: application/json
+
+{
+  "actions": [
+    {
+      "add": {
+        "index": "{{index_bak}}",
+        "alias": "{{index}}"
+      }
+    }
+  ]
+}

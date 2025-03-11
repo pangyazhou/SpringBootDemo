@@ -5,6 +5,7 @@ services:
     image: elasticsearch:7.14.0
     environment:
       - discovery.type=single-node
+      - ES_HEAP_SIZE=8g
     volumes:
       - D:\home\es\data:/usr/share/elasticsearch/data
       - D:\home\es\config:/usr/share/elasticsearch/config

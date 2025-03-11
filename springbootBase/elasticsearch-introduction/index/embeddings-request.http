@@ -1,0 +1,10 @@
+### 嵌入模型接口
+POST {{xinference_host}}/{{embedding_url}}
+Content-Type: application/json
+
+{
+  "model": "bge-small-zh-v1.5",
+  "input": "贸易顺差",
+  "encoding_format": "float"
+}
+
