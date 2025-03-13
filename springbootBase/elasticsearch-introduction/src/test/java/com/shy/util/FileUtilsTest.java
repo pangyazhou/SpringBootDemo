@@ -21,7 +21,7 @@ class FileUtilsTest {
     @Test
     void generateEsBulkFile() {
         String filePath = "test.txt";
-        String targetFilePath = "target.json";
+        String targetFilePath;
         int lineNum = 36045;
         int startIndex = 0;
         int endIndex;

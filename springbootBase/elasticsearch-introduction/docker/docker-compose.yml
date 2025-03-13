@@ -4,8 +4,11 @@ services:
     container_name: elasticsearch
     image: elasticsearch:7.14.0
     environment:
+      - node.name=elasticsearch
+      - cluster.name=elasticsearch
       - discovery.type=single-node
-      - ES_HEAP_SIZE=8g
+      - ES_HEAP_SIZE=4g
+    mem_limit: 8g
     volumes:
       - D:\home\es\data:/usr/share/elasticsearch/data
       - D:\home\es\config:/usr/share/elasticsearch/config
@@ -22,6 +25,7 @@ services:
     image: bitnami/kibana:7.14.0
     environment:
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    mem_limit: 4g
     ports:
       - 5601:5601
     networks:
