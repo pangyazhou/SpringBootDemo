@@ -1,0 +1,55 @@
+### ES操作接口
+###
+POST {{host}}/{{index_bak}}/_search
+
+###
+POST {{host}}/{{vector_index}}/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "script_score": {
+      "query": {
+        "match": {
+          "my_text": "贸易顺差"
+        }
+      },
+      "script": {
+        "source": "cosineSimilarity(params.query_vector, 'my_vector') + 1.0",
+        "params": {
+          "query_vector": []
+        }
+      }
+    }
+  },
+  "_source": ["my_text"]
+}
+
+### 批量插入文档
+POST {{host}}/_bulk
+Content-Type: application/json
+
+< ../data/embedding-docs/target0.json
+
+### 批量插入多文件文档
+POST {{host}}/_bulk
+Content-Type: application/json
+
+< ../data/embedding-docs/target0.json
+
+
+### 获取ES信息
+GET {{host}}
+### 获取ES节点信息
+GET {{host}}/_nodes/process
+
+### 获取ES索引信息
+GET {{host}}/{{vector_index}}
+
+### 查询索引数据
+GET {{host}}/{{vector_index}}/_search
+
+### 查询索引数据数量
+GET {{host}}/{{vector_index}}/_count?pretty
+
+
