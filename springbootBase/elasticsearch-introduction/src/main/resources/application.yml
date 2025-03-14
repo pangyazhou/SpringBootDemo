@@ -1,0 +1,9 @@
+server:
+  port: 8080
+
+easy-es:
+  address: 127.0.0.1:9200
+  enable: true
+  username: elastic
+  password: elastic
+
