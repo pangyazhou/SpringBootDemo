@@ -1,28 +1,31 @@
 version: "3"
 services:
-#  elastic:
-#    container_name: elasticsearch
-#    image: elasticsearch:7.14.0
-#    environment:
-#      - node.name=elasticsearch
-#      - cluster.name=elasticsearch
-#      - discovery.type=single-node
-#      - ES_HEAP_SIZE=4g
-#    mem_limit: 8g
-#    ulimits:
-#      memlock:
-#        soft: -1
-#        hard: -1
-#    volumes:
-#      - D:\home\es\data:/usr/share/elasticsearch/data
-#      - D:\home\es\config:/usr/share/elasticsearch/config
-#      - D:\home\es\plugins:/usr/share/elasticsearch/plugins
-#      - D:\home\es\logs:/usr/share/elasticsearch/logs
-#    ports:
-#      - 9200:9200
-#      - 9300:9300
-#    networks:
-#      elastic:
+  elastic:
+    container_name: elasticsearch
+    image: elasticsearch:7.14.0
+    environment:
+      - node.name=elasticsearch
+      - cluster.name=elasticsearch
+      - discovery.type=single-node
+      - ELASTIC_PASSWORD=N2@tMY6kqM
+      - xpack.security.enabled=true
+      - xpack.security.authc.api_key.enabled=true
+      - ES_HEAP_SIZE=4g
+    mem_limit: 8g
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - D:\home\es\data:/usr/share/elasticsearch/data
+      - D:\home\es\config:/usr/share/elasticsearch/config
+      - D:\home\es\plugins:/usr/share/elasticsearch/plugins
+      - D:\home\es\logs:/usr/share/elasticsearch/logs
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      elastic:
 
   kibana:
     container_name: kibana
