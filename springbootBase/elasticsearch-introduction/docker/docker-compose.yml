@@ -1,45 +1,36 @@
 version: "3"
 services:
-  elastic:
-    container_name: elasticsearch
-    image: elasticsearch:7.14.0
-    environment:
-      - node.name=elasticsearch
-      - cluster.name=elasticsearch
-      - discovery.type=single-node
-      - ELASTIC_PASSWORD=elastic
-      - xpack.security.enabled=true
-      - xpack.security.authc.api_key.enabled=true
-      - ES_HEAP_SIZE=4g
-    mem_limit: 8g
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    volumes:
-      - D:\home\es\data:/usr/share/elasticsearch/data
-      - D:\home\es\config:/usr/share/elasticsearch/config
-      - D:\home\es\plugins:/usr/share/elasticsearch/plugins
-      - D:\home\es\logs:/usr/share/elasticsearch/logs
-    ports:
-      - 9200:9200
-      - 9300:9300
-    networks:
-      elastic:
+#  elastic:
+#    container_name: elasticsearch
+#    image: elasticsearch:7.14.0
+#    environment:
+#      - node.name=elasticsearch
+#      - cluster.name=elasticsearch
+#      - discovery.type=single-node
+#      - ES_HEAP_SIZE=4g
+#    mem_limit: 8g
+#    ulimits:
+#      memlock:
+#        soft: -1
+#        hard: -1
+#    volumes:
+#      - D:\home\es\data:/usr/share/elasticsearch/data
+#      - D:\home\es\config:/usr/share/elasticsearch/config
+#      - D:\home\es\plugins:/usr/share/elasticsearch/plugins
+#      - D:\home\es\logs:/usr/share/elasticsearch/logs
+#    ports:
+#      - 9200:9200
+#      - 9300:9300
+#    networks:
+#      elastic:
 
   kibana:
     container_name: kibana
-    image: bitnami/kibana:7.14.0
-    environment:
-      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-      - ELASTICSEARCH_USERNAME=elastic
-      - ELASTICSEARCH_PASSWORD=elastic
-      - xpack.encryptedSavedObjects.encryptionKey=3bae4a7ac2890b0c13d723761319a37e
-    mem_limit: 4g
+    image: kibana:7.14.0
+    volumes:
+      - D:\home\kibana\config:/usr/share/kibana/config
     ports:
       - 5601:5601
-    depends_on:
-      - elastic
     networks:
       elastic:
 

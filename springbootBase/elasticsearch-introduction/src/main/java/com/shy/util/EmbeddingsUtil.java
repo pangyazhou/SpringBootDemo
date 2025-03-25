@@ -9,7 +9,7 @@ import com.alibaba.fastjson.JSONObject;
  * 嵌入模型相关工具接口
  */
 public class EmbeddingsUtil {
-    private static final String URL = "http://localhost:9997/v1/embeddings";
+    private static final String URL = "http://192.168.1.247:9983/v1/embeddings";
 
     /**
      * 文本向量化

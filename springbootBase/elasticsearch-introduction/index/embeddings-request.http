@@ -1,10 +1,13 @@
+@xinference_host = http://192.168.1.247:9983
+@embedding_url = v1/embeddings
+
 ### 嵌入模型接口
 POST {{xinference_host}}/{{embedding_url}}
 Content-Type: application/json
 
 {
   "model": "bge-small-zh-v1.5",
-  "input": "贸易顺差",
+  "input": "发动机故障",
   "encoding_format": "float"
 }
 

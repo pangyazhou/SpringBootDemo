@@ -16,12 +16,31 @@ public class Document {
     /**
      * 文档标题
      */
-//    @IndexField(fieldType = FieldType.TEXT)
+    @IndexField(fieldType = FieldType.TEXT, analyzer = "ik_smart")
     private String title;
 
     /**
      * 文档内容
      */
-//    @IndexField(fieldType = FieldType.KEYWORD)
+    @IndexField(fieldType = FieldType.KEYWORD)
     private String content;
+
+    /**
+     * 文档描述
+     */
+    @IndexField(fieldType = FieldType.TEXT, analyzer = "ik_smart")
+    private String description;
+
+    /**
+     * 文档向量
+     */
+    @IndexField(fieldType = FieldType.DENSE_VECTOR, dims = 512)
+    private double[] titleVector;
+
+    /**
+     * 文档向量
+     */
+    @IndexField(fieldType = FieldType.DENSE_VECTOR, dims = 512)
+    private double[] contentVector;
+
 }
